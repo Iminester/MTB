@@ -99,6 +99,8 @@ body{
 .hero{border-radius:14px;padding:18px}
 .hero.red{background:var(--redS)}
 .hero.grn{background:var(--tintS);border:1.5px solid var(--tint)}
+.hero.amb{background:var(--ambS);border:1.5px solid var(--org)}
+.hero.gry{background:var(--grp);border:1.5px solid var(--sep)}
 .hero h2{margin:0;font-size:20px;font-weight:600}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .chip{background:#fff;color:var(--deep);font-size:12px;font-weight:600;padding:4px 10px;border-radius:9px}
@@ -146,6 +148,9 @@ const ICONS = {
   act: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#15724A" stroke-width="2"/><circle cx="11" cy="11" r="4.6" fill="#15724A"><animate attributeName="r" values="3.4;5.2;3.4" dur="1.4s" repeatCount="indefinite"/></circle></svg>`,
   pen: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#D3D3D8" stroke-width="2"/></svg>`,
   xred: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="13" fill="#FF3B30"/><path d="M8.6 8.6l8.8 8.8M17.4 8.6l-8.8 8.8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>`,
+  okBig: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="13" fill="#15724A"/><path d="M7.2 13.4l3.8 3.8 8-8" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  warnBig: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2.4l11 19.2H2L13 2.4z" fill="#FF9500"/><path d="M13 10v5.6" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="18.4" r="1.3" fill="#fff"/></svg>`,
+  info: `<svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="13" fill="#A1A1A6"/><path d="M13 11.4v7" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="13" cy="7.6" r="1.4" fill="#fff"/></svg>`,
   warn: `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex:none"><path d="M10 2l8 15H2L10 2z" fill="#D99B20"/><path d="M10 8v4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="14.6" r="1" fill="#fff"/></svg>`,
   clock: `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex:none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M9 5.2v4.4l2.8 1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   spin: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#E5E5EA" stroke-width="3"/><path d="M12 2a10 10 0 0 1 10 10" stroke="#15724A" stroke-width="3" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg>`,
@@ -202,7 +207,7 @@ S.s02 = `${sb()}<div class="body">
   <div class="sect">Completed</div>
   <div class="card">
     ${[['SPU-0412','Today, 08:14','MDR-TB','p-red'],['SPU-0407','Yesterday','No resistance','p-grn'],['SPU-0399','19 Nov','Pre-XDR','p-amb']].map((d,i)=>
-    `<div class="row" data-go="s08"><div class="grow"><div class="rl">${d[0]}</div><div class="sub">${d[1]}</div></div><span class="pill ${d[3]}">${d[2]}</span>${ICONS.chev}</div>${i<2?'<div class="sep"></div>':''}`).join('')}
+    `<div class="row" data-go="s08" data-case="${d[0]}"><div class="grow"><div class="rl">${d[0]}</div><div class="sub">${d[1]}</div></div><span class="pill ${d[3]}">${d[2]}</span>${ICONS.chev}</div>${i<2?'<div class="sep"></div>':''}`).join('')}
   </div>
 </div>${tabs('Tests')}${hi()}`;
 
@@ -260,40 +265,126 @@ S.s07 = `${sb()}${nav('','SPU-0418','','')}<div class="body">
   <div class="sect">Run output</div>
   <div class="card">${[['Total reads','1.24 M'],['MTB reads after filtering','412 k'],['Mean target coverage','48 ×'],['Resistance markers screened','18']].map((f,i)=>
     `<div class="row" data-tap><div class="grow rl">${f[0]}</div><div class="rv">${f[1]}</div></div>${i<3?'<div class="sep"></div>':''}`).join('')}</div>
-  <div class="card" style="margin-top:14px"><div class="row" data-go="s08">${ICONS.spin}<div class="grow"><div style="font-size:15px;font-weight:600">Matching against WHO catalogue</div><div class="sub">Mutation catalogue v2 · Nov 2023</div></div></div></div>
-  <button class="btn" data-go="s08">View result</button>
+  <div class="card" style="margin-top:14px"><div class="row" data-go="s08" data-case="SPU-0418">${ICONS.spin}<div class="grow"><div style="font-size:15px;font-weight:600">Matching against WHO catalogue</div><div class="sub">Mutation catalogue v2 · Nov 2023</div></div></div></div>
+  <button class="btn" data-go="s08" data-case="SPU-0418">View result</button>
 </div>${hi()}`;
 
-S.s08 = `${sb()}${nav('Tests','SPU-0418','Share','s02','s10')}<div class="body">
-  <div class="hero red" data-tap>
-    <div style="display:flex;align-items:center;gap:10px">${ICONS.xred}<h2 style="color:var(--redD)">MDR-TB detected</h2></div>
-    <div style="font-size:13px;color:var(--redD);margin-top:8px;line-height:1.4">Rifampicin and isoniazid resistance found. Fluoroquinolones remain an option.</div>
+const PILL = {0:['p-grn','No resistance detected'],1:['p-red','Resistance detected'],2:['p-gry','Not tested']};
+
+/* One record per result the user can open. The list badge and the detail
+   screen are both generated from this, so they can never disagree. */
+const CASES = {
+  'SPU-0418': {
+    id:'SPU-0418', tone:'red', icon:'xred', hc:'var(--redD)',
+    head:'MDR-TB detected',
+    sub:'Rifampicin and isoniazid resistance found. Fluoroquinolones remain an option.',
+    prof:[['Rifampicin',1],['Isoniazid',1],['Fluoroquinolone',0],['Bedaquiline',0],['Linezolid',0]],
+    foot:'Genotypic result from WHO-catalogued markers. &ldquo;No resistance detected&rdquo; is not a guarantee of clinical efficacy.',
+    reg:{name:'BPaLM', sub:'6-month all-oral regimen',
+      chips:['Bedaquiline','Pretomanid','Linezolid 600 mg','Moxifloxacin'],
+      why:[['Rifampicin + isoniazid resistance','Meets the MDR/RR-TB definition'],
+           ['Fluoroquinolone marker clean','Moxifloxacin can be retained'],
+           ['No bedaquiline or linezolid markers','Core drugs remain usable']],
+      note:'Confirm with phenotypic DST and clinical judgement. Pretomanid resistance is not covered by this panel.'}},
+
+  'SPU-0412': {
+    id:'SPU-0412', tone:'red', icon:'xred', hc:'var(--redD)',
+    head:'MDR-TB detected',
+    sub:'Rifampicin and isoniazid resistance found. Fluoroquinolones remain an option.',
+    prof:[['Rifampicin',1],['Isoniazid',1],['Fluoroquinolone',0],['Bedaquiline',0],['Linezolid',0]],
+    foot:'Genotypic result from WHO-catalogued markers. &ldquo;No resistance detected&rdquo; is not a guarantee of clinical efficacy.',
+    reg:{name:'BPaLM', sub:'6-month all-oral regimen',
+      chips:['Bedaquiline','Pretomanid','Linezolid 600 mg','Moxifloxacin'],
+      why:[['Rifampicin + isoniazid resistance','Meets the MDR/RR-TB definition'],
+           ['Fluoroquinolone marker clean','Moxifloxacin can be retained'],
+           ['No bedaquiline or linezolid markers','Core drugs remain usable']],
+      note:'Confirm with phenotypic DST and clinical judgement. Pretomanid resistance is not covered by this panel.'}},
+
+  'SPU-0407': {
+    id:'SPU-0407', tone:'grn', icon:'okBig', hc:'var(--deep)',
+    head:'No resistance detected',
+    sub:'No WHO-catalogued resistance marker was found for any drug on this panel.',
+    prof:[['Rifampicin',0],['Isoniazid',0],['Fluoroquinolone',0],['Bedaquiline',0],['Linezolid',0]],
+    foot:'Genotypic result from WHO-catalogued markers. Absence of a marker is not proof of susceptibility.',
+    reg:{name:'2HRZE / 4HR', sub:'Standard 6-month first-line regimen',
+      chips:['Isoniazid','Rifampicin','Pyrazinamide','Ethambutol'],
+      why:[['No rifampicin or isoniazid markers','First-line therapy remains appropriate'],
+           ['No second-line markers','No indication to start an MDR regimen'],
+           ['All 18 targets callable','Coverage above the reporting threshold']],
+      guide:'Module 4: drug-susceptible TB treatment',
+      note:'Absence of a catalogued marker is not proof of susceptibility. Confirm with phenotypic DST if the patient fails to respond.'}},
+
+  'SPU-0399': {
+    id:'SPU-0399', tone:'amb', icon:'warnBig', hc:'var(--amb)',
+    head:'Pre-XDR-TB detected',
+    sub:'Rifampicin, isoniazid and fluoroquinolone resistance found. Bedaquiline and linezolid markers are clean.',
+    prof:[['Rifampicin',1],['Isoniazid',1],['Fluoroquinolone',1],['Bedaquiline',0],['Linezolid',0]],
+    foot:'Genotypic result from WHO-catalogued markers. &ldquo;No resistance detected&rdquo; is not a guarantee of clinical efficacy.',
+    reg:{name:'BPaL', sub:'6-month all-oral regimen',
+      chips:['Bedaquiline','Pretomanid','Linezolid 600 mg'],
+      why:[['Fluoroquinolone resistance','Moxifloxacin must be dropped from BPaLM'],
+           ['Rifampicin + isoniazid resistance','Meets the pre-XDR-TB definition'],
+           ['No bedaquiline or linezolid markers','The BPaL core remains usable']],
+      note:'Confirm with phenotypic DST. Linezolid 600 mg needs monitoring for myelosuppression and neuropathy.'}},
+
+  'XPERT': {
+    id:'Xpert MTB/RIF', tone:'red', icon:'xred', hc:'var(--redD)',
+    head:'Rifampicin resistance detected',
+    sub:'Archived result from 4 August 2026. Xpert MTB/RIF reports rifampicin only.',
+    prof:[['Rifampicin',1],['Isoniazid',2],['Fluoroquinolone',2],['Bedaquiline',2],['Linezolid',2]],
+    foot:'Xpert MTB/RIF interrogates the rpoB hotspot alone. The remaining drugs were never assayed by this test.',
+    reg:null,
+    noReg:'No regimen is suggested from a rifampicin-only result. The TB-SmartRx run of 22 November supersedes it.'},
+
+  'SMEAR': {
+    id:'Smear microscopy', tone:'gry', icon:'info', hc:'var(--lab)',
+    head:'Acid-fast bacilli seen (2+)',
+    sub:'Archived result from 28 July 2026. Smear microscopy detects bacilli but gives no drug-resistance information.',
+    prof:[['Rifampicin',2],['Isoniazid',2],['Fluoroquinolone',2],['Bedaquiline',2],['Linezolid',2]],
+    foot:'Microscopy reports bacillary load only. It cannot distinguish susceptible from resistant organisms, and cannot confirm the species.',
+    reg:null,
+    noReg:'No regimen can be suggested from microscopy alone. A molecular or culture-based test is required.'}
+};
+
+const R8 = k => { const c = CASES[k]; return `${sb()}${nav('Tests',c.id,'Share','s02','s10')}<div class="body">
+  <div class="hero ${c.tone}" data-tap>
+    <div style="display:flex;align-items:center;gap:10px">${ICONS[c.icon]}<h2 style="color:${c.hc}">${c.head}</h2></div>
+    <div style="font-size:13px;color:${c.hc};margin-top:8px;line-height:1.4">${c.sub}</div>
   </div>
   <div class="sect">Resistance profile</div>
-  <div class="card">${[['Rifampicin',1],['Isoniazid',1],['Fluoroquinolone',0],['Bedaquiline',0],['Linezolid',0]].map((d,i)=>
-    `<div class="row" data-tap><div class="grow rl">${d[0]}</div><span class="pill ${d[1]?'p-red':'p-grn'}">${d[1]?'Resistance detected':'No resistance detected'}</span></div>${i<4?'<div class="sep"></div>':''}`).join('')}</div>
-  <div class="foot">Genotypic result from WHO-catalogued markers. “No resistance detected” is not a guarantee of clinical efficacy.</div>
-  <button class="btn" data-go="s09">View suggested regimen</button>
-</div>${hi()}`;
+  <div class="card">${c.prof.map((d,i)=>
+    `<div class="row" data-tap><div class="grow rl">${d[0]}</div><span class="pill ${PILL[d[1]][0]}">${PILL[d[1]][1]}</span></div>${i<c.prof.length-1?'<div class="sep"></div>':''}`).join('')}</div>
+  <div class="foot">${c.foot}</div>
+  ${c.reg
+    ? `<button class="btn" data-go="s09">View suggested regimen</button>`
+    : `<div class="note n-amb" data-tap>${ICONS.warn}<div>${c.noReg}</div></div><button class="btn sec" data-go="s11" data-dir="back">Back to patient</button>`}
+</div>${hi()}`; };
 
-S.s09 = `${sb()}${nav('Result','Suggested regimen','','s08')}<div class="body">
-  <div class="hero grn" data-tap>
-    <div style="font-size:40px;font-weight:700;color:var(--deep);letter-spacing:-1px;line-height:1.1">BPaLM</div>
-    <div style="font-size:15px;font-weight:600;color:var(--tint);margin-top:4px">6-month all-oral regimen</div>
-    <div class="chips">${['Bedaquiline','Pretomanid','Linezolid 600 mg','Moxifloxacin'].map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-  </div>
+const R9 = k => { const c = CASES[k], g = c.reg; return `${sb()}${nav('Result','Suggested regimen','','s08')}<div class="body">
+  ${g ? `<div class="hero grn" data-tap>
+    <div style="font-size:40px;font-weight:700;color:var(--deep);letter-spacing:-1px;line-height:1.1">${g.name}</div>
+    <div style="font-size:15px;font-weight:600;color:var(--tint);margin-top:4px">${g.sub}</div>
+    <div class="chips">${g.chips.map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+  </div>` : `<div class="hero gry" data-tap>
+    <div style="display:flex;align-items:center;gap:10px">${ICONS.info}<h2>No regimen suggestion</h2></div>
+    <div style="font-size:13px;color:var(--sec);margin-top:8px;line-height:1.4">${c.noReg}</div>
+  </div>`}
   <div class="card" style="margin-top:14px"><div class="row" data-tap>
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex:none"><path d="M3 5.5h16M5 5.5v12.5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5.5" stroke="#15724A" stroke-width="1.7" stroke-linecap="round"/><path d="M8 3h6M8 9.5h6M8 13h4" stroke="#15724A" stroke-width="1.7" stroke-linecap="round"/></svg>
-    <div class="grow"><div style="font-size:15px;font-weight:600">WHO consolidated guidelines</div><div class="sub">Module 4: drug-resistant TB treatment</div></div>${ICONS.chev}</div></div>
-  <div class="note n-amb" data-tap style="display:block">
-    <div style="display:flex;gap:10px;align-items:center">${ICONS.warn}<b style="font-size:13px">Recommendation only — not a prescription</b></div>
-    <div style="font-size:12px;margin-top:8px;line-height:1.45">Confirm with phenotypic DST and clinical judgement. Pretomanid resistance is not covered by this panel.</div>
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex:none"><path d="M11 6.2C9.4 4.9 7.4 4.3 4.2 4.3a.9.9 0 0 0-.9.9v10.5c0 .5.4.9.9.9 3.2 0 5.2.6 6.8 1.9 1.6-1.3 3.6-1.9 6.8-1.9.5 0 .9-.4.9-.9V5.2a.9.9 0 0 0-.9-.9c-3.2 0-5.2.6-6.8 1.9z" stroke="#15724A" stroke-width="1.6" stroke-linejoin="round"/><path d="M11 6.2v12.3" stroke="#15724A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <div class="grow"><div style="font-size:15px;font-weight:600">WHO consolidated guidelines</div><div class="sub">${(g&&g.guide)||'Module 4: drug-resistant TB treatment'}</div></div>${ICONS.chev}</div></div>
+  ${g ? `<div class="note n-amb" data-tap style="display:block">
+    <div style="display:flex;gap:10px;align-items:center">${ICONS.warn}<b style="font-size:13px">Recommendation only &mdash; not a prescription</b></div>
+    <div style="font-size:12px;margin-top:8px;line-height:1.45">${g.note}</div>
   </div>
   <div class="sect">Why this regimen</div>
-  <div class="card">${[['Rifampicin + isoniazid resistance','Meets the MDR/RR-TB definition'],['Fluoroquinolone marker clean','Moxifloxacin can be retained'],['No bedaquiline or linezolid markers','Core drugs remain usable']].map((f,i)=>
-    `<div class="row" data-tap>${ICONS.ok}<div class="grow"><div style="font-size:15px;font-weight:600">${f[0]}</div><div class="sub">${f[1]}</div></div></div>${i<2?'<div class="sep"></div>':''}`).join('')}</div>
-  <button class="btn" data-go="s10">Create report</button>
-</div>${hi()}`;
+  <div class="card">${g.why.map((f,i)=>
+    `<div class="row" data-tap>${ICONS.ok}<div class="grow"><div style="font-size:15px;font-weight:600">${f[0]}</div><div class="sub">${f[1]}</div></div></div>${i<g.why.length-1?'<div class="sep"></div>':''}`).join('')}</div>
+  <button class="btn" data-go="s10">Create report</button>` : `<button class="btn sec" data-go="s08" data-dir="back">Back to result</button>`}
+</div>${hi()}`; };
+
+let ACTIVE = 'SPU-0418';
+S.s08 = R8(ACTIVE);
+S.s09 = R9(ACTIVE);
 
 S.s10 = `${sb()}${nav('Regimen','Report','Done','s09','s02','back')}<div class="body">
   <div style="background:#fff;border-radius:14px;padding:12px;display:flex;justify-content:center" data-tap>
@@ -315,8 +406,8 @@ S.s11 = `${sb()}${nav('Patients','SPU-0418','Edit','s02')}<div class="body">
     <div class="grow"><div style="font-size:20px;font-weight:600">SPU-0418</div><div class="sub">34 y · Female · Pulmonary</div><span class="pill p-grn" style="display:inline-block;margin-top:6px">Active treatment</span></div>
   </div>
   <div class="sect">Test history</div>
-  <div class="card">${[['22 Nov 2026','Nanopore · TB-SmartRx','MDR-TB','p-red'],['04 Aug 2026','Xpert MTB/RIF','RIF resistant','p-red'],['28 Jul 2026','Smear microscopy','AFB 2+','p-gry']].map((h,i)=>
-    `<div class="row" data-go="s08"><div class="grow"><div class="rl">${h[0]}</div><div class="sub">${h[1]}</div></div><span class="pill ${h[3]}">${h[2]}</span>${ICONS.chev}</div>${i<2?'<div class="sep"></div>':''}`).join('')}</div>
+  <div class="card">${[['22 Nov 2026','Nanopore · TB-SmartRx','MDR-TB','p-red','SPU-0418'],['04 Aug 2026','Xpert MTB/RIF','RIF resistant','p-red','XPERT'],['28 Jul 2026','Smear microscopy','AFB 2+','p-gry','SMEAR']].map((h,i)=>
+    `<div class="row" data-go="s08" data-case="${h[4]}"><div class="grow"><div class="rl">${h[0]}</div><div class="sub">${h[1]}</div></div><span class="pill ${h[3]}">${h[2]}</span>${ICONS.chev}</div>${i<2?'<div class="sep"></div>':''}`).join('')}</div>
   <div class="sect">Current regimen</div>
   <div class="card"><div style="padding:14px 16px;cursor:pointer" data-go="s09">
     <div style="display:flex;align-items:center"><div class="grow" style="font-size:17px;font-weight:600">BPaLM</div><div style="font-size:13px;color:var(--sec)">Day 12 of 168</div></div>
@@ -374,13 +465,20 @@ function go(id, dir){
   if(id === 's06') setTimeout(()=>{ const c = document.getElementById('r6'); if(c) c.style.strokeDashoffset = 2*Math.PI*86*0.38; }, 200);
 }
 function pulse(){ const el = document.getElementById(cur); if(!el) return; el.animate([{opacity:1},{opacity:.82},{opacity:1}],{duration:160}); }
+function setCase(k){
+  if(!CASES[k] || k === ACTIVE) return;
+  ACTIVE = k;
+  document.getElementById('s08').innerHTML = R8(k);
+  document.getElementById('s09').innerHTML = R9(k);
+}
 document.addEventListener('click', e=>{
   const t = e.target.closest('[data-go]');
-  if(t){ go(t.getAttribute('data-go'), t.getAttribute('data-dir')); return; }
+  if(t){ const k = t.getAttribute('data-case'); if(k) setCase(k);
+         go(t.getAttribute('data-go'), t.getAttribute('data-dir')); return; }
   const p = e.target.closest('[data-tap]');
   if(p){ p.animate([{transform:'scale(1)'},{transform:'scale(.985)'},{transform:'scale(1)'}],{duration:150}); }
 });
-function reset(){ ORDER.forEach(k=>{ const e = document.getElementById(k); e.className = base(k); e.style.transition=''; }); const c = document.getElementById('r6'); if(c) c.style.strokeDashoffset = 2*Math.PI*86; cur = null; go('s01','fade'); }
+function reset(){ ORDER.forEach(k=>{ const e = document.getElementById(k); e.className = base(k); e.style.transition=''; }); const c = document.getElementById('r6'); if(c) c.style.strokeDashoffset = 2*Math.PI*86; ACTIVE=''; setCase('SPU-0418'); cur = null; go('s01','fade'); }
 reset();
 </script>
 </body>
